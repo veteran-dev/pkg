@@ -3,8 +3,8 @@ package middleware
 import (
 	"github.com/gofiber/fiber/v2"
 	jwtware "github.com/gofiber/jwt/v2"
-	"github.com/veteran-dev/veteran/pkg/fxuntils"
-	"github.com/veteran-dev/veteran/pkg/system/configfx"
+	"github.com/veteran-dev/pkg/fxuntils"
+	"github.com/veteran-dev/pkg/system/configfx"
 )
 
 // Protected protect routes

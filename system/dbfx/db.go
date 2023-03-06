@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/veteran-dev/veteran/pkg/system/configfx"
+	"github.com/veteran-dev/pkg/system/configfx"
 	"go.uber.org/fx"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"

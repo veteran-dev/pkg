@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/redis/go-redis/v9"
-	"github.com/veteran-dev/veteran/pkg/system/configfx"
+	"github.com/veteran-dev/pkg/system/configfx"
 	"go.uber.org/fx"
 )
 

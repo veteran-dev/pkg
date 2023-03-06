@@ -2,7 +2,7 @@ package httpfx
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"github.com/veteran-dev/veteran/pkg/system/configfx"
+	"github.com/veteran-dev/pkg/system/configfx"
 	"go.uber.org/fx"
 )
 
