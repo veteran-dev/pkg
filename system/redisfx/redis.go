@@ -29,3 +29,7 @@ var Module = fx.Options(
 		return &Logger{Name: "redis"}
 	}),
 )
+
+const (
+	AccountToken = "account:token:%d"
+)

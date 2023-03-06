@@ -10,9 +10,11 @@ import (
 
 // ApplicationConfig ...
 type ApplicationConfig struct {
-	Address                      string        `yaml:"address"`
-	AppName                      string        `yaml:"name"`
-	PasswordSalt                 string        `yaml:"salt"`
+	Address      string `yaml:"address"`
+	AppName      string `yaml:"name"`
+	PasswordSalt string `yaml:"salt"`
+	TokenExpire  int    `yaml:"expire"`
+
 	BodyLimit                    int           `yaml:"body_limit"`
 	CaseSensitive                bool          `yaml:"case_sensitive"`
 	CompressedFileSuffix         string        `yaml:"suffix"`
@@ -79,7 +81,7 @@ type Config struct {
 // ProvideConfig provides the standard configuration to fx
 func ProvideConfig() *Config {
 	conf := Config{}
-	data, err := ioutil.ReadFile("./config.yaml")
+	data, err := ioutil.ReadFile("config.yaml")
 	if err != nil {
 		panic(err)
 	}
