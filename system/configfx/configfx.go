@@ -63,6 +63,7 @@ type PostgresConfig struct {
 type RedisConfig struct {
 	RedisHost     string `yaml:"host"`
 	RedisPassword string `yaml:"password"`
+	RedisDB       int    `yaml:"db"`
 	RedisPort     int    `yaml:"port"`
 }
 

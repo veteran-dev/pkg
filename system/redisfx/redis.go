@@ -8,12 +8,13 @@ import (
 	"go.uber.org/fx"
 )
 
-func ConnectRedis(c *configfx.Config, db int) *redis.Client {
+func ConnectRedis(c *configfx.Config) *redis.Client {
 	addr := fmt.Sprintf("%s:%d", c.RedisConfig.RedisHost, c.RedisConfig.RedisPort)
+
 	return redis.NewClient(&redis.Options{
 		Addr:     addr,
 		Password: c.RedisConfig.RedisPassword, // no password set
-		DB:       db,
+		DB:       c.RedisConfig.RedisDB,       // use default DB
 	})
 }
 
