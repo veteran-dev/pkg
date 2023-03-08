@@ -31,14 +31,20 @@ func Send(c *fiber.Ctx, resp Response) error {
 }
 
 const (
-	InvalidJWT          = 4100
-	MissingJWT          = 4101
-	EmptyParam          = 4111
-	ParamMissing        = 4112
-	LoginFailed         = 4113
-	AccountNotExist     = 4114
-	PasswordNotMatch    = 4115
-	GenerateTokenFailed = 4116
+	InvalidJWT   = 4100
+	MissingJWT   = 4101
+	EmptyParam   = 4111
+	ParamMissing = 4112
+
+	LoginFailed         = 4201
+	QueryAccountFailed  = 4202
+	AccountNotExist     = 4203
+	PasswordNotMatch    = 4204
+	GenerateTokenFailed = 4205
+
+	QueryAccountServiceFailed  = 4301
+	CreateAccountServiceFailed = 4302
+	UpdateAccountServiceFailed = 4303
 )
 
 func SuccessStatusMessage(status int) string {
@@ -59,10 +65,16 @@ var failStatusMessage = []string{
 	4101: "missing or malformed JWT.", // StatusContinue
 	4111: "empty parameter.",
 	4112: "missing parameter.",
-	4113: "login failed.",
-	4114: "account does not exist.",
-	4115: "passwords do not match.",
-	4116: "failed to generate token.",
+
+	4201: "login failed.",
+	4202: "query account failed.",
+	4203: "account does not exist.",
+	4204: "passwords do not match.",
+	4205: "failed to generate token.",
+
+	4301: "query account service failed.",
+	4302: "failed to create account service.",
+	4303: "failed to modify account service.",
 }
 
 const (
