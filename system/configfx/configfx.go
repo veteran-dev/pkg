@@ -50,26 +50,11 @@ type ApplicationConfig struct {
 	WriteTimeout      time.Duration `yaml:"write_timeout"`
 }
 
-type PostgresConfig struct {
-	PostgresHost     string `yaml:"host"`
-	PostgresUser     string `yaml:"user"`
-	PostgresPassword string `yaml:"password"`
-	PostgresDbName   string `yaml:"dbname"`
-	PostgresPort     int    `yaml:"port"`
-	PostgresSslMode  string `yaml:"sslmode"`
-	PostgresTimeZone string `yaml:"time_zone"`
-}
-
-type RedisConfig struct {
-	RedisHost     string `yaml:"host"`
-	RedisPassword string `yaml:"password"`
-	RedisDB       int    `yaml:"db"`
-	RedisPort     int    `yaml:"port"`
-}
-
 type DatabaseConfig struct {
-	PostgresConfig `yaml:"postgres"`
-	RedisConfig    `yaml:"redis"`
+	Host     string `yaml:"host"`
+	Password string `yaml:"password"`
+	DB       int    `yaml:"db"`
+	Port     int    `yaml:"port"`
 }
 
 // Config ...

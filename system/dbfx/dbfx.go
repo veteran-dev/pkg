@@ -1,4 +1,4 @@
-package redisfx
+package dbfx
 
 import (
 	"fmt"
@@ -9,12 +9,12 @@ import (
 )
 
 func ConnectRedis(c *configfx.Config) *redis.Client {
-	addr := fmt.Sprintf("%s:%d", c.RedisConfig.RedisHost, c.RedisConfig.RedisPort)
+	addr := fmt.Sprintf("%s:%d", c.DatabaseConfig.Host, c.DatabaseConfig.Port)
 
 	return redis.NewClient(&redis.Options{
 		Addr:     addr,
-		Password: c.RedisConfig.RedisPassword, // no password set
-		DB:       c.RedisConfig.RedisDB,       // use default DB
+		Password: c.DatabaseConfig.Password, // no password set
+		DB:       c.DatabaseConfig.DB,       // use default DB
 	})
 }
 

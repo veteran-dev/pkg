@@ -10,16 +10,14 @@ import (
 	"github.com/veteran-dev/pkg/system/configfx"
 	"github.com/veteran-dev/pkg/system/dbfx"
 	"github.com/veteran-dev/pkg/system/httpfx"
-	"github.com/veteran-dev/pkg/system/loggerfx"
-	"github.com/veteran-dev/pkg/system/redisfx"
+	logfx "github.com/veteran-dev/pkg/system/logfx"
 	"go.uber.org/fx"
 	"go.uber.org/zap"
-	"gorm.io/gorm"
 )
 
 func registerHooks(
 	lifecycle fx.Lifecycle,
-	slog *zap.SugaredLogger, cfg *configfx.Config, app *fiber.App, db *gorm.DB, redis *redis.Client,
+	slog *zap.SugaredLogger, cfg *configfx.Config, app *fiber.App, db *redis.Client,
 ) {
 	idleConnsClosed := make(chan struct{})
 	lifecycle.Append(
@@ -49,7 +47,7 @@ func registerHooks(
 				return nil
 			},
 			OnStop: func(context.Context) error {
-				redis.Close()
+				db.Close()
 				<-idleConnsClosed
 				return slog.Sync()
 			},
@@ -60,9 +58,8 @@ func registerHooks(
 // Module provided to fx
 var Module = fx.Options(
 	configfx.Module,
-	loggerfx.Module,
+	logfx.Module,
 	httpfx.Module,
 	dbfx.Module,
-	redisfx.Module,
 	fx.Invoke(registerHooks),
 )
