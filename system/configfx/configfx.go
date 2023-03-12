@@ -66,7 +66,7 @@ type Config struct {
 // ProvideConfig provides the standard configuration to fx
 func ProvideConfig() *Config {
 	conf := Config{}
-	data, err := ioutil.ReadFile("config.yaml")
+	data, err := ioutil.ReadFile("app.yaml")
 	if err != nil {
 		panic(err)
 	}
@@ -79,7 +79,8 @@ func ProvideConfig() *Config {
 	return &conf
 }
 
-// Module provided to fx
+// // Module provided to fx
 var Module = fx.Options(
+	fx.Invoke(ProvideConfig),
 	fx.Provide(ProvideConfig),
 )

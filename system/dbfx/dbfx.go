@@ -3,19 +3,21 @@ package dbfx
 import (
 	"fmt"
 
-	"github.com/redis/go-redis/v9"
+	"github.com/albrow/zoom"
 	"github.com/veteran-dev/pkg/system/configfx"
 	"go.uber.org/fx"
 )
 
-func ConnectRedis(c *configfx.Config) *redis.Client {
+func ConnectRedis(c *configfx.Config) *zoom.Pool {
 	addr := fmt.Sprintf("%s:%d", c.DatabaseConfig.Host, c.DatabaseConfig.Port)
 
-	return redis.NewClient(&redis.Options{
-		Addr:     addr,
-		Password: c.DatabaseConfig.Password, // no password set
-		DB:       c.DatabaseConfig.DB,       // use default DB
-	})
+	options := zoom.PoolOptions{
+		Address:  addr,
+		Password: c.DatabaseConfig.Password,
+		Database: c.DatabaseConfig.DB,
+		Network:  "tcp",
+	}
+	return zoom.NewPoolWithOptions(options)
 }
 
 type Logger struct {
@@ -24,12 +26,6 @@ type Logger struct {
 
 // Module provided to fx
 var Module = fx.Options(
+	fx.Invoke(ConnectRedis),
 	fx.Provide(ConnectRedis),
-	fx.Provide(func() *Logger {
-		return &Logger{Name: "redis"}
-	}),
-)
-
-const (
-	AccountToken = "account:token:%d"
 )
